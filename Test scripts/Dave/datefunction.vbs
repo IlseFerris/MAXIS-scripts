@@ -221,8 +221,13 @@ Function display_work_rules(work_rules_members) 'displays a dialog showing the g
 		fity_nine_date = dateadd("yyyy", -59, month_date) 
 	'Go through the member_array we just generated and check ages
 		For memb = 1 to ubound(HH_member_array)
+			'msgbox sixteen_date & " " & HH_member_array(memb).birthdate
 			if isdate(HH_member_array(memb).birthdate) = True Then
-				if HH_member_array(memb).birthdate < sixteen_date AND HH_member_array(memb).birthdate > fifty_nine_date Then HH_member_array(memb).first_checkbox = True 'using first checkbox to store the users we need
+				msgbox memb & " " & sixteen_date & " " & HH_member_array(memb).birthdate
+				if HH_member_array(memb).birthdate > sixteen_date Then'AND HH_member_array(memb).birthdate > fifty_nine_date Then 
+				HH_member_array(memb).first_checkbox = True 'using first checkbox to store the users we need
+				msgbox sixteen_date & " " & HH_member_array(memb).birthdate
+				end if
 			Else
 				HH_member_array(memb).first_checkbox = true 'If we don't have a birthdate for this memb, put them in the list
 			End if 
@@ -267,6 +272,21 @@ Function display_work_rules(work_rules_members) 'displays a dialog showing the g
 				 PushButton 210, 260, 145, 15, "Press here to return to the previous dialog.", return_to_info_btn
 			EndDialog
 			'Display the dialog
+							 For memb = 1 to ubound(HH_member_array)
+				 	
+					If HH_member_array(memb).first_checkbox = True Then
+						msgbox HH_member_array(memb).name
+						if memb_count mod 2 = 1 then  'putting odd numbers in left column
+							x_loc = 20
+							y_pos = y_pos + 15
+						else 'even in right
+							x_loc = 250
+						End if 
+						redim preserve memb_list(memb_count, 2)
+						checkbox, x_loc, y_pos, 200, 10, HH_member_array(memb).name, memb_list(memb_count, 1)
+						memb_count = memb_count + 1
+					End If 
+				 Next
 			Do 
 				Dialog Dialog1
 			Loop until ButtonPressed = continue_button

@@ -65,6 +65,17 @@ call changelog_update("07/02/2021", "Initial version.", "Casey Love, Hennepin Co
 'Actually displays the changelog. This function uses a text file located in the My Documents folder. It stores the name of the script file and a description of the most recent viewed change.
 changelog_display
 'END CHANGELOG BLOCK =======================================================================================================
+'This class is necessary for the HH_member_enhanced_dialog. 
+	Class member_data
+		public member_number
+		public name
+		public ssn
+		public birthdate
+        public PMI_number
+        public first_checkbox
+        public second_checkbox
+        public elig_type
+	End Class
 
 'Function needed for work rules, can remove once updated in funclib
 function HH_member_enhanced_dialog(HH_member_array, instruction_text, display_birthdate, display_ssn, first_checkbox, first_checkbox_default, second_checkbox, second_checkbox_default)
